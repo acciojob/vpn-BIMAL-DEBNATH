@@ -7,7 +7,7 @@ import java.util.List;
 public class ServiceProvider {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer serviceProviderId;
+    private Integer id;
 
     private String name;
 
@@ -19,7 +19,7 @@ public class ServiceProvider {
     List<Country> countryList=new ArrayList<>();
 
     @ManyToMany(mappedBy = "serviceProvider",cascade = CascadeType.ALL) //check why
-    List<User> userList=new ArrayList<>();
+    List<User> users =new ArrayList<>();
 
     @OneToMany(mappedBy = "serviceProvider",cascade = CascadeType.ALL)
     List<Connection> connectionList=new ArrayList<>();  //check
@@ -33,12 +33,12 @@ public class ServiceProvider {
     }
 
 
-    public Integer getServiceProviderId() {
-        return serviceProviderId;
+    public Integer getId() {
+        return id;
     }
 
-    public void setServiceProviderId(Integer serviceProviderId) {
-        this.serviceProviderId = serviceProviderId;
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public String getName() {
@@ -65,12 +65,12 @@ public class ServiceProvider {
         this.countryList = countryList;
     }
 
-    public List<User> getUserList() {
-        return userList;
+    public List<User> getUsers() {
+        return users;
     }
 
-    public void setUserList(List<User> userList) {
-        this.userList = userList;
+    public void setUsers(List<User> users) {
+        this.users = users;
     }
 
     public List<Connection> getConnectionList() {

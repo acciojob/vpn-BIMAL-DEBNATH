@@ -8,9 +8,9 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Integer id;
-  private String userName;
+  private String username;
   private String password;
-  private boolean connected;
+  private boolean isConnected;
   private String maskedIp;
   private String originalIp;
 
@@ -23,15 +23,15 @@ public class User {
     private Country originalCountry; //this file will remain unaffected even connection made;
 
     @OneToMany(mappedBy = "user",cascade = CascadeType.ALL)
-    private List<Connection>connectionList=new ArrayList<>();
+    private List<Connection> connected =new ArrayList<>();
 
     public User() {
     }
 
     public User(String name, String password, boolean connected) {
-        this.userName = name;
+        this.username = name;
         this.password = password;
-        this.connected = connected;
+        this.isConnected = connected;
 
     }
 
@@ -43,12 +43,12 @@ public class User {
         this.id = id;
     }
 
-    public String getUserName() {
-        return userName;
+    public String getUsername() {
+        return username;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getPassword() {
@@ -60,11 +60,11 @@ public class User {
     }
 
     public boolean isConnected() {
-        return connected;
+        return isConnected;
     }
 
     public void setConnected(boolean connected) {
-        this.connected = connected;
+        this.isConnected = connected;
     }
 
     public String getMaskedIp() {
@@ -99,12 +99,12 @@ public class User {
         this.originalCountry = originalCountry;
     }
 
-    public List<Connection> getConnectionList() {
-        return connectionList;
+    public List<Connection> getConnected() {
+        return connected;
     }
 
-    public void setConnectionList(List<Connection> connectionList) {
-        this.connectionList = connectionList;
+    public void setConnected(List<Connection> connected) {
+        this.connected = connected;
     }
 
 }

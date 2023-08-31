@@ -44,8 +44,8 @@ public class ConnectionServiceImpl implements ConnectionService {
             List<Country>countryList=serviceProvider.getCountryList();
             for(Country country1:countryList){
                 if(country1.getCountryName().equals(country.getCountryName())){ //can use country code
-                    if(smallestId==null || smallestId>serviceProvider.getServiceProviderId()){
-                        smallestId=serviceProvider.getServiceProviderId();
+                    if(smallestId==null || smallestId>serviceProvider.getId()){
+                        smallestId=serviceProvider.getId();
                     }
                 }
             }
@@ -63,7 +63,7 @@ public class ConnectionServiceImpl implements ConnectionService {
         connection.setServiceProvider(serviceProvider);
         connection.setUser(user);
 
-        user.getConnectionList().add(connection);
+        user.getConnected().add(connection);
         serviceProvider.getConnectionList().add(connection);
 
         //we have to save to parent

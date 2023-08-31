@@ -34,7 +34,7 @@ public class AdminServiceImpl implements com.driver.services.AdminService {
 
         ServiceProvider serviceProvider=new ServiceProvider(providerName);
         serviceProvider.setAdmin(admin);
-        admin.getServiceProviderList().add(serviceProvider);
+        admin.getServiceProviders().add(serviceProvider);
         adminRepository1.save(admin);
         return admin;
     }

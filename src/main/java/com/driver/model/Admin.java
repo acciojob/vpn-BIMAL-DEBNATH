@@ -8,39 +8,39 @@ import java.util.List;
 public class Admin {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer adminId;
+    private Integer id;
 
-    private String name;
+    private String username;
 
     private  String password;
 
 
     @OneToMany(mappedBy = "admin",cascade = CascadeType.ALL)
-    List<ServiceProvider>serviceProviderList=new ArrayList<>();
+    List<ServiceProvider> serviceProviders =new ArrayList<>();
 
     public Admin() {
     }
 
     public Admin(String name, String password) {
-        this.name = name;
+        this.username = name;
         this.password = password;
     }
 
 
-    public Integer getAdminId() {
-        return adminId;
+    public Integer getId() {
+        return id;
     }
 
-    public void setAdminId(Integer adminId) {
-        this.adminId = adminId;
+    public void setId(Integer id) {
+        this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getUsername() {
+        return username;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getPassword() {
@@ -51,12 +51,12 @@ public class Admin {
         this.password = password;
     }
 
-    public List<ServiceProvider> getServiceProviderList() {
-        return serviceProviderList;
+    public List<ServiceProvider> getServiceProviders() {
+        return serviceProviders;
     }
 
-    public void setServiceProviderList(List<ServiceProvider> serviceProviderList) {
-        this.serviceProviderList = serviceProviderList;
+    public void setServiceProviders(List<ServiceProvider> serviceProviders) {
+        this.serviceProviders = serviceProviders;
     }
 
 }
