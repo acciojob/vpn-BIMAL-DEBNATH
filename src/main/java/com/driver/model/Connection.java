@@ -8,7 +8,7 @@ public class Connection {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer Id;
+    private Integer id;
 
     @ManyToOne
     @JoinColumn
@@ -16,15 +16,15 @@ public class Connection {
 
     @ManyToOne 
     @JoinColumn
-    private ServiceProvider serviceProvider; //g & s
+    private ServiceProvider serviceProvider;
 
 
     public Integer getId() {
-        return Id;
+        return id;
     }
 
     public void setId(Integer id) {
-        Id = id;
+        this.id = id;
     }
 
     public User getUser() {

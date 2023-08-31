@@ -10,7 +10,7 @@ public class User {
   private Integer id;
   private String username;
   private String password;
-  private boolean isConnected;
+  private boolean connected;
   private String maskedIp;
   private String originalIp;
 
@@ -23,7 +23,7 @@ public class User {
     private Country originalCountry; //this file will remain unaffected even connection made;
 
     @OneToMany(mappedBy = "user",cascade = CascadeType.ALL)
-    private List<Connection> connected =new ArrayList<>();
+    private List<Connection> connectionList =new ArrayList<>();
 
     public User() {
     }
@@ -31,7 +31,7 @@ public class User {
     public User(String name, String password, boolean connected) {
         this.username = name;
         this.password = password;
-        this.isConnected = connected;
+        this.connected = connected;
 
     }
 
@@ -59,12 +59,12 @@ public class User {
         this.password = password;
     }
 
-    public boolean isConnected() {
-        return isConnected;
+    public boolean getConnectionList() {
+        return connected;
     }
 
-    public void setConnected(boolean connected) {
-        this.isConnected = connected;
+    public void setConnectionList(boolean connectionList) {
+        this.connected = connectionList;
     }
 
     public String getMaskedIp() {
@@ -100,11 +100,11 @@ public class User {
     }
 
     public List<Connection> getConnected() {
-        return connected;
+        return connectionList;
     }
 
     public void setConnected(List<Connection> connected) {
-        this.connected = connected;
+        this.connectionList = connected;
     }
 
 }
