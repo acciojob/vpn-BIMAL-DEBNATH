@@ -14,6 +14,11 @@ public class Connection {
     @JoinColumn
     private User user;
 
+    @ManyToOne 
+    @JoinColumn
+    private ServiceProvider serviceProvider; //g & s
+
+
     public Integer getId() {
         return Id;
     }
@@ -28,5 +33,13 @@ public class Connection {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public ServiceProvider getServiceProvider() {
+        return serviceProvider;
+    }
+
+    public void setServiceProvider(ServiceProvider serviceProvider) {
+        this.serviceProvider = serviceProvider;
     }
 }

@@ -1,17 +1,12 @@
 package com.driver.model;// Note: Do not write @Enumerated annotation above CountryName in this model.
 
-import com.driver.model.ServiceProvider;
-
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
 
 public class Country {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer Id;
-    private String countyName;
-
+    private CountryName countryName;
     private String code;
 
     @OneToOne
@@ -22,14 +17,13 @@ public class Country {
     @JoinColumn
     private ServiceProvider serviceProvider;
 
-    @OneToMany(mappedBy = "country",cascade = CascadeType.ALL)
-    List<User>userList=new ArrayList<>();
+
 
     public Country() {
     }
 
-    public Country(String countyName, String code) {
-        this.countyName = countyName;
+    public Country(CountryName countyName, String code) {
+        this.countryName = countyName;
         this.code = code;
     }
 
@@ -42,12 +36,12 @@ public class Country {
         Id = id;
     }
 
-    public String getCountyName() {
-        return countyName;
+    public CountryName getCountryName() {
+        return countryName;
     }
 
-    public void setCountyName(String countyName) {
-        this.countyName = countyName;
+    public void setCountryName(CountryName countryName) {
+        this.countryName = countryName;
     }
 
     public String getCode() {
@@ -74,11 +68,26 @@ public class Country {
         this.serviceProvider = serviceProvider;
     }
 
-    public List<User> getUserList() {
-        return userList;
-    }
 
-    public void setUserList(List<User> userList) {
-        this.userList = userList;
+    public void enrich (String countryName) throws Exception {
+        String updatedName = countryName.toUpperCase();
+        if (updatedName.equals("IND")) {
+            this.setCountryName(CountryName.IND);
+            this.setCode(CountryName.IND.toCode());
+        } else if (updatedName.equals("USA")) {
+            this.setCountryName(CountryName.USA);
+            this.setCode(CountryName.USA.toCode());
+        } else if (updatedName.equals("AUS")) {
+            this.setCountryName(CountryName.AUS);
+            this.setCode(CountryName.AUS.toCode());
+        } else if (updatedName.equals("CHI")) {
+            this.setCountryName(CountryName.CHI);
+            this.setCode(CountryName.CHI.toCode());
+        } else if (updatedName.equals("JPN")) {
+            this.setCountryName(CountryName.JPN);
+            this.setCode(CountryName.JPN.toCode());
+        } else {
+            throw new Exception("Country not found");
+        }
     }
 }

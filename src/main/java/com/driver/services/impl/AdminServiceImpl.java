@@ -6,14 +6,12 @@ import com.driver.model.ServiceProvider;
 import com.driver.repository.AdminRepository;
 import com.driver.repository.CountryRepository;
 import com.driver.repository.ServiceProviderRepository;
-import com.driver.services.AdminService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.util.Optional;
 
 @Service
-public class AdminServiceImpl implements AdminService {
+public class AdminServiceImpl implements com.driver.services.AdminService {
     @Autowired
     AdminRepository adminRepository1;
 
@@ -32,8 +30,9 @@ public class AdminServiceImpl implements AdminService {
 
     @Override
     public Admin addServiceProvider(int adminId, String providerName) {
-        ServiceProvider serviceProvider=new ServiceProvider(providerName);
         Admin admin=adminRepository1.findById(adminId).get();
+
+        ServiceProvider serviceProvider=new ServiceProvider(providerName);
         serviceProvider.setAdmin(admin);
         admin.getServiceProviderList().add(serviceProvider);
         adminRepository1.save(admin);
@@ -45,7 +44,10 @@ public class AdminServiceImpl implements AdminService {
         Optional<ServiceProvider>optionalServiceProvider=serviceProviderRepository1.findById(serviceProviderId);
         ServiceProvider serviceProvider=optionalServiceProvider.get();
 
-        Country country=new Country(countryName);
+        Country country=new Country();
+        country.enrich(countryName);
+
+
         country.setServiceProvider(serviceProvider);
         serviceProvider.getCountryList().add(country);
 

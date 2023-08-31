@@ -1,8 +1,6 @@
 package com.driver.model;
 
 
-import jdk.internal.module.ServicesCatalog;
-
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -60,4 +58,5 @@ public class Admin {
     public void setServiceProviderList(List<ServiceProvider> serviceProviderList) {
         this.serviceProviderList = serviceProviderList;
     }
+
 }

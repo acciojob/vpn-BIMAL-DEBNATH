@@ -1,7 +1,6 @@
 package com.driver.model;
 
 import javax.persistence.*;
-import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -81,4 +80,5 @@ public class ServiceProvider {
     public void setConnectionList(List<Connection> connectionList) {
         this.connectionList = connectionList;
     }
+
 }
