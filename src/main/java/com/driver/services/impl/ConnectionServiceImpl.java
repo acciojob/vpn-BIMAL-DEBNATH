@@ -106,9 +106,10 @@ public class ConnectionServiceImpl implements ConnectionService {
         if(!receiver.getConnectionList()){
             receiverCurrCountry=receiver.getOriginalCountry();
         }else {
-            String countryCode[] = receiver.getMaskedIp().split(".");
 
-            String code=countryCode[0];
+
+            String code=receiver.getMaskedIp().substring(0,3);
+
 
             receiverCurrCountry=countryRepository.findCountryByCode(code);
         }
