@@ -29,23 +29,28 @@ public class ConnectionServiceImpl implements ConnectionService {
         if(user.getConnectionList()){
             throw new Exception("Already connected");
         }
-        if(String.valueOf(user.getOriginalCountry().getCountryName()).equals(countryName)){
+
+
+        Country country=new Country();
+        country.enrich(countryName); //do with new ei
+
+        if(user.getOriginalCountry().equals(country)){ //
             return user;
         }
-
-        Country country=countryRepository.findByName(countryName).get(); //do with new ei
 
         List<ServiceProvider> providerList=user.getServiceProviderList(); //OneToMany
 
 
         Integer smallestId=null;
+        ServiceProvider serviceProvider=null;
 
-        for(ServiceProvider serviceProvider:providerList){
-            List<Country>countryList=serviceProvider.getCountryList();
+        for(ServiceProvider Provider:providerList){
+            List<Country>countryList=Provider.getCountryList();
             for(Country country1:countryList){
                 if(country1.getCountryName().equals(country.getCountryName())){ //can use country code
-                    if(smallestId==null || smallestId>serviceProvider.getId()){
-                        smallestId=serviceProvider.getId();
+                    if(smallestId==null || smallestId>Provider.getId()){
+                        smallestId=Provider.getId();
+                        serviceProvider=Provider;
                     }
                 }
             }
@@ -58,7 +63,7 @@ public class ConnectionServiceImpl implements ConnectionService {
         user.setMaskedIp(country.getCode()+"."+smallestId+"."+userId);
         user.setConnectionList(true);
 
-        ServiceProvider serviceProvider=serviceProviderRepository2.findById(smallestId).get();
+
         Connection connection=new Connection(); //save first
         connection.setServiceProvider(serviceProvider);
         connection.setUser(user);
@@ -103,7 +108,7 @@ public class ConnectionServiceImpl implements ConnectionService {
         }else {
             String countryCode[] = receiver.getMaskedIp().split(".");
 
-            int code=Integer.parseInt(countryCode[0]);
+            String code=countryCode[0];
 
             receiverCurrCountry=countryRepository.findCountryByCode(code);
         }
